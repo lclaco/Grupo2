@@ -17,9 +17,11 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <script>
         // Para uso en el formulario
-        const IVA = 19;
+        const IVA = 1.19;
         let confirmacion = false;
         let valorServicio = 0;
+        const ValorExterior = 7000;
+        const ValorMotor = 5000;
     </script>
 </head>
 <body>
@@ -470,11 +472,20 @@ $('#formulario').submit(function(evento){
         //Cambia confirmacion a true, el proximo evento submit enviara el formulario
         confirmacion = true;
 
-        //TO DO: Hacer el calculo de valor total de servicio
-//      valorServicio = (calculo) + IVA
+        //Calculo de valor total de servicio
+        //Si al momento de presionar "Registrarse", uno o mas de los checkbox estan "checked", añade su valor al valor de servicio total
+        if( $('input:checkbox[id="lavadoExterior"]').is(':checked')){
+            valorServicio = valorServicio + ValorExterior
+        }  
+        if ( $('input:checkbox[id="lavadoMotor"]').is(':checked')){
+            valorServicio = valorServicio + ValorMotor
+        }
+
+        //Aplica el IVA
+        valorServicio = (valorServicio * IVA)
 
         //Setea el texto del input de valor total al valor despues del calculo mas IVA
-        Total.text("$"+valorServicio);
+        Total.val("$"+valorServicio);
     }
 
     // FUNCION BOTON VOLVER
@@ -493,6 +504,11 @@ $('#formulario').submit(function(evento){
 
         //Cambia confirmacion a false de nuevo
         confirmacion = false;
+        
+        //Resetea el valor servicio a 0 y cambia los checkbox a unchecked.
+        valorServicio = 0;
+        $('#lavadoExterior').prop('checked', false);
+        $('#lavadoMotor').prop('checked', false);
 
     });
 
