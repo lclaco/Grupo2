@@ -7,7 +7,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AutoSucio</title>
+    <title>AutoLimpio</title>
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon " href="assets/img/favicon.ico"/>
     <!-- Jquery -->
@@ -20,6 +20,8 @@
         const IVA = 1.19;
         let confirmacion = false;
         let valorServicio = 0;
+        let Servicio
+        let enviar = false;
         const ValorExterior = 7000;
         const ValorMotor = 5000;
     </script>
@@ -212,39 +214,39 @@
                     <label for="propietario" class="text-center text-danger">Datos </label>
                     <div class="form-group">
                         <label for="nombre" class="form-label">Nombre *</label>
-                        <input type="text" class="form-control" id="nombres" maxlength="30">
-                        <div id="errorNombres" class="text fs-6 fst-italic text-danger error"></div>
+                        <input type="text" class="form-control" id="nombres" >
+                        <div id="errorNombres" class="text fs-6 text-danger error"></div>
                     </div>
                     <div class="form-group">
-                        <label for="apellido" class="form-label">2 Apellidos *</label>
-                        <input type="text" class="form-control" id="apellido" maxlength="30">
-                        <div id="errorApellidos" class="text fs-6 fst-italic text-danger error"></div>
+                        <label for="apellido" class="form-label">Apellidos *</label>
+                        <input type="text" class="form-control" id="apellido" >
+                        <div id="errorApellidos" class="text fs-6 text-danger error"></div>
                     </div>
                     <div class="row">
                         <div class="form-group col-6">
-                            <label for="run" class="form-label">RUN *</label> 
-                            <input type="text" class="form-control" id="run">                    
-                            <div id="errorRun" class="text fs-6 fst-italic text-danger error"></div>
+                            <label for="run" class="form-label">RUN *</label>
+                            <input type="number" class="form-control" id="run" >                        
+                            <div id="errorRun" class="text fs-6 text-danger error"></div>
                         </div>
                         <div class="form-group col-3">
                             <label for="x"></label>
                             <p class="text-center">-</p>
                         </div>
                         <div class="form-group col-3">
-                            <label for="verificador" class="form-label">DV *</label>                        
-                            <input type="text" class="form-control" id="verificador" maxlength="1">
-                            <div id="errorVerificador" class="text fs-6 fst-italic text-danger error"></div>
+                            <label for="verificador" class="form-label">*</label>                        
+                            <input type="text" class="form-control" id="verificador" >
+                            <div id="errorVerificador" class="text fs-3 text-danger error"></div>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="domicilio">Dirección *</label>
-                        <input type="text" class="form-control" id="direccion" maxlength="80">
-                        <div id="errorDireccion" class="text fs-6 fst-italic text-danger error"></div>
+                        <input type="text" class="form-control" id="direccion" >
+                        <div id="errorDireccion" class="text fs-6 text-danger error"></div>
                     </div>
                     <div class="form-group">
                         <label for="domicilio">Comuna *</label>
-                        <input type="text" class="form-control" id="direccion" >
-                        <div id="errorDireccion" class="text fs-6 fst-italic text-danger error"></div><br>
+                        <input type="text" class="form-control" id="comuna" >
+                        <div id="errorDireccion" class="text fs-6 text-danger error"></div><br>
                     </div>
                     <br>      
                 </div>
@@ -255,28 +257,28 @@
                         <div class="form-group">
                             <label for="marca" class="form-label">Tipo de vehiculo</label>
                             <select class="form-select" name="tipoVehiculo" id="tipo">
-                                <option value="1">Furgon</option>
-                                <option value="2" selected>Automovil</option>
-                                <option value="3">Camion</option>
-                                <option value="4">Camioneta</option>
-                                <option value="5">Moto</option>
+                                <option value="Furgon">Furgon</option>
+                                <option value="Automovil" selected>Automovil</option>
+                                <option value="Camion">Camion</option>
+                                <option value="Camioneta">Camioneta</option>
+                                <option value="Moto">Moto</option>
                             </select>
-                            <div id="errorTipo" class="text fs-6 fst-italic text-danger error"></div>
+                            <div id="errorTipo" class="text fs-6 text-danger error"></div>
                         </div>
                         <div class="form-group">
                             <label for="marca" class="form-label">Marca *</label>
-                            <input type="text" class="form-control" id="marca" maxlength="20">
-                            <div id="errorMarca" class="text fs-6 fst-italic text-danger error"></div>
+                            <input type="text" class="form-control" id="marca">
+                            <div id="errorMarca" class="text fs-6 text-danger error"></div>
                         </div>
                         <div class="form-group">
                             <label for="modelo" class="form-label">Modelo *</label>
-                            <input type="text" class="form-control" id="modelo" maxlength="20">
-                            <div id="errorModelo" class="text fs-6 fst-italic text-danger error"></div>
+                            <input type="text" class="form-control" id="modelo" >
+                            <div id="errorModelo" class="text fs-6 text-danger error"></div>
                         </div> 
                         <div class="form-group">
                             <label for="year" class="form-label">Año *</label>
-                            <input type="number" class="form-control" id="year" maxlength="4" >                        
-                            <div id="errorYear" class="text fs-6 fst-italic text-danger error"></div>                            
+                            <input type="number" class="form-control" id="year" >                        
+                            <div id="errorYear" class="text fs-6 text-danger error"></div>                            
                         </div>
                         <div class="form-group">
                             <label for="revision" class="form-label">Revision tecnica:</label><br>
@@ -301,7 +303,7 @@
                             <label for="servicio" class="form-label">Tipo de servicio:</label><br>
                             <input type="checkbox" class="form-check-input" name="CheckboxServicios" id="lavadoExterior"> Lavado exterior ($7.000)<br>
                             <input type="checkbox" class="form-check-input" name="CheckboxServicios" id="lavadoMotor"> Lavado motor ($5.000)<br>
-                            <div id="errorServicio" class="text fs-6 fst-italic text-danger error"></div>                            
+                            <div id="errorServicio" class="text fs-6 text-danger error"></div>                            
                         </div><br>
                     </div>
                     <div class="form-group">
@@ -311,17 +313,17 @@
                                min="2022-01-01">                       
                     </div><br>
                     <div class="form-group d-none" id="valortotal">
-                        <label class="form-label">Valor Total (+ IVA)</label>
+                        <label for="nombre" class="form-label">Valor Total (+ IVA)</label>
                         <input type="text" class="form-control" id="total" disabled value="$0">
                     </div>                    
                 </div>
-                <div id="enviar" class="text-center fs-3 fst-italic text-danger d-none">Por favor, revise antes de confirmar.</div>                  
+                <div id="enviar" class="text-center fs-3 text-danger d-none">Por favor, revise antes de confirmar.</div>                  
                 <br>
                 <br>
                 <!-- BOTONES -->
                 <div class="col-12 col-sm-4 text-center2">
                     <button type="submit" class="btn btn-primary" name="botonValor" id="registrarse">Registrarse</button>
-                    <button type="submit" class="btn btn-primary d-none" id="confirmar">Confirmar</button>
+                    <button type="submit" class="btn btn-primary d-none" id="confirmar" data-bs-toggle="modal" data-bs-target="#modalOT">Generar orden de trabajo</button>
                     <input type="button" class="btn btn-primary d-none" id="volver" value="Volver">
                     <br>
                     <br>
@@ -330,7 +332,39 @@
         </div>
         </form>
     </div>
-    </section>
+
+
+    <!-- MODAL OT -->
+    <div class="modal fade" id="modalOT" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Orden de trabajo creada</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Su orden de trabajo fue creada con éxito, recuerde llegar con 15 minutos de anticipación a la fecha y horario elegido y contactar con su encargado de servicio.</p>
+                <p>Los datos de su orden son:</p>               
+                <b>Nombre: </b><span id="otNombre"></span>                    </br>
+                <b>RUN: </b><span id="otRUN"></span>                          </br>
+                <b>Dirección: </b><span id="otDireccion"></span>              </br>
+                <b>Comuna: </b><span id="otComuna"></span>                    </br>
+                <b>Tipo de vehículo: </b><span id="otVehiculo"></span>        </br>
+                <b>Modelo: </b><span id="otModelo"></span>                    </br>
+                <b>Marca: </b><span id="otMarca"></span>                      </br>
+                <b>Año: </b><span id="otYear"></span>                         </br>
+                <b>Revisión Técnica: </b><span id="otRevision"></span>        </br>
+                <b>Tipo de servicio: </b><span id="otServicio"></span>        </br>
+                <b>Encargado de servicio: </b><span id="otEncargado"></span>  </br>
+                <b>Fecha de servicio: </b><span id="otFecha"></span>          </br>
+                <b>Total del servicio: </b><span id="otTotal"></span>         </br>
+            </div>
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+          </div>
+        </div>
+      </div>
     
 <!-- Footer -->
 <footer class="bg-light text-center text-white"> 
@@ -345,16 +379,28 @@
 
 
 <script>
-    // Validadores de caracteres
-    var expnom = /^[a-zA-ZÀ-ÿ\u00f1\u00d1]{3,15}$/; //Valida UN nombre con largo de 15 caracteres, u00f1 y u00d1 son ñ y Ñ
-    var expape = /^[a-zA-ZÀ-ÿ\u00f1\u00d1]{3,12}\s[a-zA-ZÀ-ÿ\u00f1\u00d1]{3,12}$/; // 2 apellidos largo min 3 y max 12 caracteres cada apellido
-    var exprun = /^[0-9]{7,8}$/; //valida que sean de 7 a 8 digitos. Tambien podría ser con puntos: /^([0-9]{1,2}\.[0-9]{3}\.[0-9]{3}$/;
-    var expdv = /^([0-9]|[k]|[K]){1}$/; //valida que sea 1 caracter numerico o K min o may
-    var expanio = /^\d{4}$/;
+//TO DO:
+//Validacion de caracteres (longitud y tipo de caracteres admitidos (consultar documento))
+
 
 // LISTENER 
 $('#formulario').submit(function(evento){
     
+    // Toma span de la OT
+    const otNombre = $('#otNombre');
+    const otRUN = $('#otRUN');
+    const otDireccion = $('#otDireccion');
+    const otVehiculo = $('#otVehiculo');
+    const otComuna = $('#otComuna');
+    const otMarca = $('#otMarca');
+    const otModelo = $('#otModelo');
+    const otYear = $('#otYear');
+    const otRevision = $('#otRevision');
+    const otServicios = $('#otServicio');
+    const otEncargado = $('#otEncargado ');
+    const otFecha = $('#otFecha');
+    const otTotal = $('#otTotal');
+
     // Toma los valores del formulario
     const Nombres = $('#nombres');
     const Apellidos = $('#apellido');
@@ -367,8 +413,7 @@ $('#formulario').submit(function(evento){
     const Modelo = $('#modelo');
     const Year = $('#year');
     const Revision = $('#revision');
-    const Servicios = $('#servicios');
-    const Encargado = $('#encargado');
+    const Encargado = $('#encargados');
     const Fecha = $('#fecha');
     const Total = $('#total');
 
@@ -396,29 +441,22 @@ $('#formulario').submit(function(evento){
 
     
     // VERIFICADORES 
-    if(Nombres.val() == null || Nombres.val() == "" || !expnom.test(Nombres.val())){
+    if(Nombres.val() == null || Nombres.val() == ""){
         evento.preventDefault();
-        $('#errorNombres').text("Corrija su nombre");
+        $('#errorNombres').text("Escriba sus nombres");
         Nombres.addClass("input-error");
     }
 
-    if(Apellidos.val() == null || Apellidos.val() == "" || !expape.test(Apellidos.val())){
+    if(Apellidos.val() == null || Apellidos.val() == ""){
         evento.preventDefault();
-        $('#errorApellidos').text("Corrija sus apellidos");
+        $('#errorApellidos').text("Escriba sus apellidos");
         Apellidos.addClass("input-error");
     }
 
-    
-    if (RUN.val() == null || RUN.val() == "" || !exprun.test(RUN.val())){
+    if(RUN.val() == null || RUN.val() == ""){
         evento.preventDefault();
-        $('#errorRun').text("Su RUN no es válido");
+        $('#errorRun').text("Escriba su RUN");
         RUN.addClass("input-error");
-    }
-
-    if(DigitoVerificador.val() == null || DigitoVerificador.val() == "" || !expdv.test(DigitoVerificador.val())){
-        evento.preventDefault();
-        $('#errorVerificador').text("Corrija su DV");
-        DigitoVerificador.addClass("input-error");
     }
 
     if(Direccion.val() == null || Direccion.val() == ""){
@@ -439,9 +477,9 @@ $('#formulario').submit(function(evento){
         Modelo.addClass("input-error");
     }
 
-    if(Year.val() == null || Year.val() == "" || !expanio.test(Year.val())){
+    if(Year.val() == null || Year.val() == ""){
         evento.preventDefault();
-        $('#errorYear').text("Ingrese el año de su vehiculo");
+        $('#errorYear').text("Escriba el año de su vehiculo");
         Year.addClass("input-error");
     }
 
@@ -451,21 +489,54 @@ $('#formulario').submit(function(evento){
     }
 
 
-    // CONFIRMACION 
-    if(confirmacion == true && Nombres.val().length > 0 && Apellidos.val().length > 0 && RUN.val().length > 0 &&
-    Direccion.val().length > 0 && exprdv.test(DigitoVerificador) && Modelo.val().length > 0 &&
-    Marca.val().length > 0 && Year.val().length > 0 && $('input:checkbox[name="CheckboxServicios"]').is(':checked') &&
-    expnom.test(Nombres.val()) && expdv.test(DigitoVerificador.val()) && expanio.test(Year.val()) && exprun.test(RUN.val()) && expape.test(Apellidos.val())){
-       
-       //TO DO: Creacion de la Orden de Trabajo con todos los datos recolectados
-        alert("Registro completo")
+    // CONFIRMACION
+    if(enviar == false && confirmacion == true && Nombres.val().length > 0 && Apellidos.val().length > 0 && RUN.val().length > 0 &&
+    Direccion.val().length > 0 && DigitoVerificador.val().length > 0 && Modelo.val().length > 0 &&
+    Marca.val().length > 0 && Year.val().length > 0 && Nombres.val().length > 0 && $('input:checkbox[name="CheckboxServicios"]').is(':checked')){
+        evento.preventDefault();
+        //Asigna los datos recolectados del formulario para la OT
+        otNombre.html(Nombres.val()+" "+Apellidos.val());
+        otRUN.html(RUN.val()+"-"+DigitoVerificador.val());
+        otDireccion.html(Direccion.val());
+        otVehiculo.html(Tipo.val());
+        otEncargado.html($("#encargados option:selected").text()); // saca el texto de la opcion seleccionada
+        otFecha.html(Fecha.val());
+        otMarca.html(Marca.val());
+        otModelo.html(Modelo.val());
+        otTotal.html(Total.val());
+        otYear.html(Year.val());
+        otComuna.html(Comuna.val());
+
+        if( $('input:checkbox[id="revision"]').is(':checked')){
+            otRevision.html("Al dia");
+        }else{
+            otRevision.html("No regularizado");
+        }
+
+        if( $('input:checkbox[id="lavadoExterior"]').is(':checked')){
+                Servicio = "Lavado exterior"
+        }
+        if ( $('input:checkbox[id="lavadoMotor"]').is(':checked')){   
+            if(Servicio == null){
+                Servicio = " Lavado de motor "
+            }else{
+            Servicio = Servicio + " y Lavado de motor "
+        }
+        }
+        otServicios.html(Servicio);
+
+        enviar = true;
+
+        $('#confirmar').text("Confirmar");
+        $('#volver').addClass("d-none");
+        
+
     }
 
     // CALCULO
-    if(confirmacion == false && Nombres.val().length > 0 && Apellidos.val().length > 0 && RUN.val().length > 0 &&
+    if(enviar == false && confirmacion == false && Nombres.val().length > 0 && Apellidos.val().length > 0 && RUN.val().length > 0 &&
     Direccion.val().length > 0 && DigitoVerificador.val().length > 0 && Modelo.val().length > 0 &&
-    Marca.val().length > 0 && Year.val().length > 0 && $('input:checkbox[name="CheckboxServicios"]').is(':checked')  &&
-    expnom.test(Nombres.val()) && expdv.test(DigitoVerificador.val()) && expanio.test(Year.val()) && exprun.test(RUN.val()) && expape.test(Apellidos.val())){
+    Marca.val().length > 0 && Year.val().length > 0 && Nombres.val().length > 0 && $('input:checkbox[name="CheckboxServicios"]').is(':checked')){
         evento.preventDefault();
 
         // Disable a todos los elementos del input con la clase correspondiente para confirmar si los datos estan bien 
@@ -498,6 +569,7 @@ $('#formulario').submit(function(evento){
 
         //Setea el texto del input de valor total al valor despues del calculo mas IVA
         Total.val("$"+valorServicio);
+
     }
 
     // FUNCION BOTON VOLVER
@@ -519,10 +591,15 @@ $('#formulario').submit(function(evento){
         
         //Resetea el valor servicio a 0 y cambia los checkbox a unchecked.
         valorServicio = 0;
+        Servicio = null;
         $('#lavadoExterior').prop('checked', false);
         $('#lavadoMotor').prop('checked', false);
 
     });
+
+    if(enviar == true){
+        
+    }
 
 
 
