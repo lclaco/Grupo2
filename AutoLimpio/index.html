@@ -3,20 +3,28 @@
 <head>
     <meta name="description" content="Empresa de lavado de autos" />
     <meta name="keywords" content="lavado, limpieza, lavado de autos, autos" />
-    <meta name="author" content="Leonel Clavijo" />
+    <meta name="author" content="Leonel Clavijo, Andres Vargas, Luciano Neira, Michael Philip, Paola Uribe" />
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AutoLimpio</title>
     <!-- Favicon -->
-    <link rel="" href="assets/img/favicon.ico" />
+    <link rel="icon" type="image/x-icon " href="assets/img/favicon.ico"/>
     <!-- Jquery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-    
-    
+    <script>
+        // Para uso en el formulario
+        const IVA = 1.19;
+        let confirmacion = false;
+        let valorServicio = 0;
+        let Servicio
+        let enviar = false;
+        const ValorExterior = 7000;
+        const ValorMotor = 5000;
+    </script>
 </head>
 <body>
     <!-- Menu -->
@@ -44,8 +52,6 @@
           </div>
         </div>
     </nav>
-    
-
     <div class="conntainer-fluid mt-3">
         <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-indicators">
@@ -53,7 +59,7 @@
               <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
               <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
             </div>
-            <div class="carousel-inner">
+            <div class="carousel-inner"><!--Creacion de carrusel-->
               <div class="carousel-item active">
                 <img src="assets/img/sl3.jpg" class="d-block w-100" alt="...">
                 <div class="carousel-caption d-none d-md-block">
@@ -166,13 +172,9 @@
             </div>       
         </div>
     </section>
-    
-
     <!-- Nuestro Equipo -->
     <section class="container-fluid bg-white text-primary mt-3" id="trabajadores">
-        <br>
-        <br>
-        <br>
+        <br>        <br>        <br>
         <h1 class="text-center ">Equipo de Trabajo</h1>
         <p class="text-center">AutoLimpio</p>
         <br>
@@ -181,8 +183,7 @@
        <div class="row ">
             <div class="class="col-12 col-sm-6">
                 <div class="container-fluid" >
-                    <br>
-                    <br>
+                    <br>                    <br>
                     <p class="text-center fst-italic" >"Estimado cliente, nos encargaremos personalmente que sea bien atendido, nuestra intención es que usted se sienta tranquilo dejando su auto con un equipo de profesionales que harán su mayor esfuerzo para que usted esté conforme con nuestro trabajo"</p>
                     <br>
                     <p class="text-start" >Equipo AutoLimpio.</p>
@@ -195,7 +196,6 @@
             </div>        
         </div>
     </section>
-    
     <!-- Formulario POST-->
     <section class="container-fluid bg-white text-primary mt-3" id="registro">
         <br>
@@ -206,26 +206,27 @@
         <br>
     </section>
     <section class="container-fluid mt-3" id="formulario">
+    <div id="hider">
         <form id="formulario" method="post" class="p-4 shadow bg-white">
             <div class="row text-primary">
-                <!--Propietario-->
-                <div class="col-12 col-sm-6 ">
-                    <label for="propietario" class="text-center text-danger">Datos del Propietario</label>
+                <!--Primera columna-->
+                <div class="col-12 col-sm-4 ">
+                    <label for="propietario" class="text-center text-danger">Datos </label>
                     <div class="form-group">
                         <label for="nombre" class="form-label">Nombre *</label>
-                        <input type="text" class="form-control" id="nombre" >
-                        <div id="errorNombres" class="text fs-6 text-danger"></div>
+                        <input type="text" class="form-control" id="nombres" >
+                        <div id="errorNombres" class="text fs-6 text-danger error"></div>
                     </div>
                     <div class="form-group">
                         <label for="apellido" class="form-label">Apellidos *</label>
                         <input type="text" class="form-control" id="apellido" >
-                        <div id="errorApellido" class="text fs-6 text-danger"></div>
+                        <div id="errorApellidos" class="text fs-6 text-danger error"></div>
                     </div>
                     <div class="row">
                         <div class="form-group col-6">
                             <label for="run" class="form-label">RUN *</label>
-                            <input type="text" class="form-control" id="run" >                        
-                            <div id="errorrun" class="text fs-3 text-danger"></div>
+                            <input type="number" class="form-control" id="run" >                        
+                            <div id="errorRun" class="text fs-6 text-danger error"></div>
                         </div>
                         <div class="form-group col-3">
                             <label for="x"></label>
@@ -234,58 +235,392 @@
                         <div class="form-group col-3">
                             <label for="verificador" class="form-label">*</label>                        
                             <input type="text" class="form-control" id="verificador" >
-                            <div id="errorverificador" class="text fs-3 text-danger "></div>
+                            <div id="errorVerificador" class="text fs-6 text-danger error"></div>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="domicilio">Dirección *</label>
                         <input type="text" class="form-control" id="direccion" >
-                        <div id="errorDireccion" class="text fs-6 text-danger"></div>
+                        <div id="errorDireccion" class="text fs-6 text-danger error"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="domicilio">Comuna *</label>
+                        <input type="text" class="form-control" id="comuna" >
+                        <div id="errorDireccion" class="text fs-6 text-danger error"></div><br>
                     </div>
                     <br>      
                 </div>
-                <!--Vehiculo    -->
-                <div class="col-12 col-sm-6">
+                <!--Segunda columna-->
+                <div class="col-12 col-sm-4">
                     <span for="vehiculo" class="text-center text-danger">Datos del Vehículo</span>
                     <div class="form-group">
                         <div class="form-group">
+                            <label for="marca" class="form-label">Tipo de vehiculo</label>
+                            <select class="form-select" name="tipoVehiculo" id="tipo">
+                                <option value="Furgon">Furgon</option>
+                                <option value="Automovil" selected>Automovil</option>
+                                <option value="Camion">Camion</option>
+                                <option value="Camioneta">Camioneta</option>
+                                <option value="Moto">Moto</option>
+                            </select>
+                            <div id="errorTipo" class="text fs-6 text-danger error"></div>
+                        </div>
+                        <div class="form-group">
                             <label for="marca" class="form-label">Marca *</label>
-                            <input type="text" class="form-control" id="marca" >
-                            <div id="errorMarca" class="text fs-6 text-danger"></div>
+                            <input type="text" class="form-control" id="marca">
+                            <div id="errorMarca" class="text fs-6 text-danger error"></div>
                         </div>
                         <div class="form-group">
                             <label for="modelo" class="form-label">Modelo *</label>
                             <input type="text" class="form-control" id="modelo" >
-                            <div id="errorModelo" class="text fs-6 text-danger"></div>
+                            <div id="errorModelo" class="text fs-6 text-danger error"></div>
                         </div> 
                         <div class="form-group">
                             <label for="year" class="form-label">Año *</label>
                             <input type="number" class="form-control" id="year" >                        
-                            <div id="errorYear" class="text fs-6 text-danger"></div>                            
+                            <div id="errorYear" class="text fs-6 text-danger error"></div>                            
                         </div>
+                        <div class="form-group">
+                            <label for="revision" class="form-label">Revision tecnica:</label><br>
+                            <input type="checkbox" class="form-check-input" name="Revision" id="revision"> Al día                                               
+                        </div><br>
                     </div> 
                 </div>
-                
+                <div class="col-12 col-sm-4">
+                    <span for="vehiculo" class="text-center text-danger">Detalles del Servicio</span>
+                    <div class="form-group">
+                        <label for="servicio" class="form-label">Encargado de servicio:</label><br>
+                        <select class="form-select" name="Encargados" id="encargados">
+                            <option value="1">Andres Vargas</option>
+                            <option value="2">Leonel Clavijo</option>
+                            <option value="3">Luciano Neira</option>
+                            <option value="4">Michael Philip</option>
+                            <option value="5">Paola Uribe</option>
+                        </select>                            
+                    </div><br>
+                    <div class="form-group">
+                        <div class="form-group">
+                            <label for="servicio" class="form-label">Tipo de servicio:</label><br>
+                            <input type="checkbox" class="form-check-input" name="CheckboxServicios" id="lavadoExterior"> Lavado exterior ($7.000)<br>
+                            <input type="checkbox" class="form-check-input" name="CheckboxServicios" id="lavadoMotor"> Lavado motor ($5.000)<br>
+                            <div id="errorServicio" class="text fs-6 text-danger error"></div>                            
+                        </div><br>
+                    </div>
+                    <div class="form-group">
+                        <label for="date">Fecha de servicio:</label>
+                        <input type="date" class="form-control" id="fecha" name="fechaServicio"
+                               value="2022-02-20"
+                               min="2022-01-01">                       
+                    </div><br>
+                    <div class="form-group d-none" id="valortotal">
+                        <label for="nombre" class="form-label">Valor Total (+ IVA)</label>
+                        <input type="text" class="form-control" id="total" disabled value="$0">
+                    </div>                    
+                </div>
+                <div id="enviar" class="text-center fs-3 text-danger d-none">Por favor, revise antes de confirmar.</div>                  
+                <br>
+                <br>
+                <!-- BOTONES -->
                 <div class="col-12 col-sm-4 text-center2">
-                    <button type="submit" class="btn btn-primary" name="botonValor" id="botonRegistrarse">Valor</button>
+                    <button type="submit" class="btn btn-primary" name="botonValor" id="registrarse">Registrarse</button>
+                    <button type="submit" class="btn btn-primary d-none" id="confirmar" data-bs-toggle="modal" data-bs-target="#modalOT">Generar orden de trabajo</button>
+                    <input type="button" class="btn btn-primary d-none" id="volver" value="Volver">
                     <br>
                     <br>
                 </div>
-                
-            </div>
-            
-            </div>
+            </div>    
+        </div>
         </form>
-    </section>
+    </div>
+
+
+    <!-- MODAL OT -->
+    <div class="modal fade" id="modalOT" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Orden de trabajo creada</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Su orden de trabajo fue creada con éxito, recuerde llegar con 15 minutos de anticipación a la fecha y horario elegido y contactar con su encargado de servicio.</p>
+                <p>Los datos de su orden son:</p>               
+                <b>Nombre: </b><span id="otNombre"></span>                    </br>
+                <b>RUN: </b><span id="otRUN"></span>                          </br>
+                <b>Dirección: </b><span id="otDireccion"></span>              </br>
+                <b>Comuna: </b><span id="otComuna"></span>                    </br>
+                <b>Tipo de vehículo: </b><span id="otVehiculo"></span>        </br>
+                <b>Modelo: </b><span id="otModelo"></span>                    </br>
+                <b>Marca: </b><span id="otMarca"></span>                      </br>
+                <b>Año: </b><span id="otYear"></span>                         </br>
+                <b>Revisión Técnica: </b><span id="otRevision"></span>        </br>
+                <b>Tipo de servicio: </b><span id="otServicio"></span>        </br>
+                <b>Encargado de servicio: </b><span id="otEncargado"></span>  </br>
+                <b>Fecha de servicio: </b><span id="otFecha"></span>          </br>
+                <b>Total del servicio: </b><span id="otTotal"></span>         </br>
+            </div>
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+          </div>
+        </div>
+      </div>
     
-<!-- footer -->
+<!-- Footer -->
 <footer class="bg-light text-center text-white"> 
     <!-- Copyright -->
 <div class="text-center p-3" style="background-color: rgba(26, 48, 241, 0.2);">
 © 2022 Copyright:
-<a class="text-white" href="#">Leonel Clavijo</a>
+<a class="text-center text-white nav-link px-2">Leonel Clavijo, Andres Vargas, Luciano Neira, Michael Philip, Paola Uribe</a>
 </div>
 <!-- Copyright -->
 </footer>
+
+
+
+<script>
+    // Validadores de caracteres
+    var expnom = /^[a-zA-ZÀ-ÿ\u00f1\u00d1]{3,15}$/; //Valida UN nombre con largo de 15 caracteres, u00f1 y u00d1 son ñ y Ñ
+    var expape = /^[a-zA-ZÀ-ÿ\u00f1\u00d1]{3,12}\s[a-zA-ZÀ-ÿ\u00f1\u00d1]{3,12}$/; // 2 apellidos largo min 3 y max 12 caracteres cada apellido
+    var exprun = /^[0-9]{7,8}$/; //valida que sean de 7 a 8 digitos. Tambien podría ser con puntos: /^([0-9]{1,2}\.[0-9]{3}\.[0-9]{3}$/;
+    var expdv = /^([0-9]|[k]|[K]){1}$/; //valida que sea 1 caracter numerico o K min o may
+    var expanio = /^\d{4}$/;
+
+
+// LISTENER 
+$('#formulario').submit(function(evento){
+    
+    // Toma span de la OT
+    const otNombre = $('#otNombre');
+    const otRUN = $('#otRUN');
+    const otDireccion = $('#otDireccion');
+    const otVehiculo = $('#otVehiculo');
+    const otComuna = $('#otComuna');
+    const otMarca = $('#otMarca');
+    const otModelo = $('#otModelo');
+    const otYear = $('#otYear');
+    const otRevision = $('#otRevision');
+    const otServicios = $('#otServicio');
+    const otEncargado = $('#otEncargado ');
+    const otFecha = $('#otFecha');
+    const otTotal = $('#otTotal');
+
+    // Toma los valores del formulario
+    const Nombres = $('#nombres');
+    const Apellidos = $('#apellido');
+    const RUN = $('#run');
+    const DigitoVerificador = $('#verificador');
+    const Direccion = $('#direccion');
+    const Comuna = $('#comuna');
+    const Tipo = $('#tipo');
+    const Marca = $('#marca');
+    const Modelo = $('#modelo');
+    const Year = $('#year');
+    const Revision = $('#revision');
+    const Encargado = $('#encargados');
+    const Fecha = $('#fecha');
+    const Total = $('#total');
+
+    //Toma valores de error
+    const errorNombres = $('#errorNombres');
+    const errorApellido = $('#errorApellidos');
+    const errorRun = $('#errorRun');
+    const errorVerificador = $('#errorVerificador');
+    const errorDireccion = $('#errorDireccion');
+    const errorComuna = $('#errorComuna');
+    const errorTipo = $('#errorTipo');
+    const errorMarca = $('#errorMarca');
+    const errorModelo = $('#errorModelo');
+    const errorYear = $('#errorYear');
+    const errorServicio = $('#errorServicio');
+
+
+    // Al cambiar el estado de un elemento input, borra los mensajes de error
+    $('input').change(function(){
+        $(this).removeClass("border-danger");       
+        const padre = $(this).parent();             
+        padre.children('div.error').text("");       
+    });
+
+
+    
+   // VERIFICADORES 
+   if(Nombres.val() == null || Nombres.val() == "" || !expnom.test(Nombres.val())){
+        evento.preventDefault();
+        $('#errorNombres').text("Corrija su nombre");
+        Nombres.addClass("input-error");
+    }
+
+    if(Apellidos.val() == null || Apellidos.val() == "" || !expape.test(Apellidos.val())){
+        evento.preventDefault();
+        $('#errorApellidos').text("Corrija sus apellidos");
+        Apellidos.addClass("input-error");
+    }
+
+    
+    if (RUN.val() == null || RUN.val() == "" || !exprun.test(RUN.val())){
+        evento.preventDefault();
+        $('#errorRun').text("Su RUN no es válido");
+        RUN.addClass("input-error");
+    }
+
+    if(DigitoVerificador.val() == null || DigitoVerificador.val() == "" || !expdv.test(DigitoVerificador.val())){
+        evento.preventDefault();
+        $('#errorVerificador').text("Corrija su DV");
+        DigitoVerificador.addClass("input-error");
+    }
+
+    if(Direccion.val() == null || Direccion.val() == ""){
+        evento.preventDefault();
+        $('#errorDireccion').text("Escriba su direccion");
+        Direccion.addClass("input-error");
+    }
+
+    if(Marca.val() == null || Marca.val() == ""){
+        evento.preventDefault();
+        $('#errorMarca').text("Escriba la marca de su vehiculo");
+        Marca.addClass("input-error");
+    }
+
+    if(Modelo.val() == null || Modelo.val() == ""){
+        evento.preventDefault();
+        $('#errorModelo').text("Escriba el modelo de su vehiculo");
+        Modelo.addClass("input-error");
+    }
+
+    if(Year.val() == null || Year.val() == "" || !expanio.test(Year.val())){
+        evento.preventDefault();
+        $('#errorYear').text("Ingrese el año de su vehiculo");
+        Year.addClass("input-error");
+    }
+
+    if(!$('input:checkbox[name="CheckboxServicios"]').is(':checked')){
+        evento.preventDefault(); 
+        $('#errorServicio').text("Marque al menos una de las opciones."); 
+    }
+
+
+    // CONFIRMACION
+    if(enviar == false && confirmacion == true && Nombres.val().length > 0 && Apellidos.val().length > 0 && RUN.val().length > 0 &&
+    Direccion.val().length > 0 && DigitoVerificador.val().length > 0 && Modelo.val().length > 0 &&
+    Marca.val().length > 0 && Year.val().length > 0 && Nombres.val().length > 0 && $('input:checkbox[name="CheckboxServicios"]').is(':checked')&&
+    expnom.test(Nombres.val()) && expdv.test(DigitoVerificador.val()) && expanio.test(Year.val()) && exprun.test(RUN.val()) && expape.test(Apellidos.val())){
+        evento.preventDefault();
+        //Asigna los datos recolectados del formulario para la OT
+        otNombre.html(Nombres.val()+" "+Apellidos.val());
+        otRUN.html(RUN.val()+"-"+DigitoVerificador.val());
+        otDireccion.html(Direccion.val());
+        otVehiculo.html(Tipo.val());
+        otEncargado.html($("#encargados option:selected").text()); // saca el texto de la opcion seleccionada
+        otFecha.html(Fecha.val());
+        otMarca.html(Marca.val());
+        otModelo.html(Modelo.val());
+        otTotal.html(Total.val());
+        otYear.html(Year.val());
+        otComuna.html(Comuna.val());
+
+        if( $('input:checkbox[id="revision"]').is(':checked')){
+            otRevision.html("Al dia");
+        }else{
+            otRevision.html("No regularizado");
+        }
+
+        if( $('input:checkbox[id="lavadoExterior"]').is(':checked')){
+                Servicio = "Lavado exterior"
+        }
+        if ( $('input:checkbox[id="lavadoMotor"]').is(':checked')){   
+            if(Servicio == null){
+                Servicio = " Lavado de motor "
+            }else{
+            Servicio = Servicio + " y Lavado de motor "
+        }
+        }
+        otServicios.html(Servicio);
+
+        enviar = true;
+
+        $('#confirmar').text("Confirmar");
+        $('#volver').addClass("d-none");
+        
+
+    }
+
+    // CALCULO
+    if(enviar == false && confirmacion == false && Nombres.val().length > 0 && Apellidos.val().length > 0 && RUN.val().length > 0 &&
+    Direccion.val().length > 0 && DigitoVerificador.val().length > 0 && Modelo.val().length > 0 &&
+    Marca.val().length > 0 && Year.val().length > 0 && Nombres.val().length > 0 && $('input:checkbox[name="CheckboxServicios"]').is(':checked') &&
+    expnom.test(Nombres.val()) && expdv.test(DigitoVerificador.val()) && expanio.test(Year.val()) && exprun.test(RUN.val()) && expape.test(Apellidos.val())){
+        evento.preventDefault();
+
+        // Disable a todos los elementos del input con la clase correspondiente para confirmar si los datos estan bien 
+        $( ".form-control" ).attr("disabled","disabled");
+        $( ".form-select" ).attr("disabled","disabled");
+        $( ".form-select" ).attr("disabled","disabled");
+        $( ".form-check-input" ).attr("disabled","disabled");
+
+        //Quita el hide a los botones de Confirmar y Volver, y al input de Valor Total, aplica hide sobre el boton Enviar
+        $( "#confirmar" ).removeClass("d-none");
+        $( "#volver" ).removeClass("d-none");
+        $( "#enviar" ).removeClass("d-none");
+        $( "#valortotal" ).removeClass("d-none");
+        $( "#registrarse" ).addClass("d-none");
+
+        //Cambia confirmacion a true, el proximo evento submit enviara el formulario
+        confirmacion = true;
+
+        //Calculo de valor total de servicio
+        //Si al momento de presionar "Registrarse", uno o mas de los checkbox estan "checked", añade su valor al valor de servicio total
+        if( $('input:checkbox[id="lavadoExterior"]').is(':checked')){
+            valorServicio = valorServicio + ValorExterior
+        }  
+        if ( $('input:checkbox[id="lavadoMotor"]').is(':checked')){
+            valorServicio = valorServicio + ValorMotor
+        }
+
+        //Aplica el IVA
+        valorServicio = (valorServicio * IVA)
+
+        //Setea el texto del input de valor total al valor despues del calculo mas IVA
+        Total.val("$"+valorServicio);
+
+    }
+
+    // FUNCION BOTON VOLVER
+    $('#volver').click(function () {
+        // Devuelve el estado original de los elementos afectados 
+        $( ".form-control" ).attr("disabled",false);
+        $( ".form-select" ).attr("disabled",false);
+        $( ".form-select" ).attr("disabled",false);
+        $( ".form-check-input" ).attr("disabled",false);
+
+        $( "#confirmar" ).addClass("d-none");
+        $( "#volver" ).addClass("d-none");
+        $( "#enviar" ).addClass("d-none");
+        $( "#valortotal" ).addClass("d-none");
+        $( "#registrarse" ).removeClass("d-none");
+
+        //Cambia confirmacion a false de nuevo
+        confirmacion = false;
+        
+        //Resetea el valor servicio a 0 y cambia los checkbox a unchecked.
+        valorServicio = 0;
+        Servicio = null;
+        $('#lavadoExterior').prop('checked', false);
+        $('#lavadoMotor').prop('checked', false);
+
+    });
+
+    if(enviar == true){
+        
+    }
+
+
+
+
+});
+
+
+</script>
+
 </body>
 </html>
